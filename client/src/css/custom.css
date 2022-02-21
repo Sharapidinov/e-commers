@@ -1,0 +1,19 @@
+
+.card{
+    width: 300px;
+}
+
+.burger-enter {
+    opacity: 0;
+}
+.burger-enter-active {
+    opacity: 1;
+    transition: opacity 200ms;
+}
+.burger-exit {
+    opacity: 1;
+}
+.burger-exit-active {
+    opacity: 0;
+    transition: opacity 200ms;
+}
