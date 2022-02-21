@@ -23,10 +23,6 @@ server.use(cookieParser())
 server.use(passport.initialize())
 passport.use("jwt", JwtStrategy)
 
-server.get("/get", ((req, res) => {
-    res.json("hello")
-}))
-
 server.use("/api/v1/auth", userRoutes)
 server.use("/api/v1/products", productRoutes)
 server.use("/api/v1/comments", commentsRoutes)
