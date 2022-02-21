@@ -23,18 +23,21 @@ server.use(cookieParser())
 server.use(passport.initialize())
 passport.use("jwt", JwtStrategy)
 
+server.get("/get", ((req, res) => {
+    res.json("hello")
+}))
 
-server.use("/api/v1/auth", userRoutes)
-server.use("/api/v1/products", productRoutes)
-server.use("/api/v1/comments", commentsRoutes)
-server.use("/static/images", express.static("images"))
+// server.use("/api/v1/auth", userRoutes)
+// server.use("/api/v1/products", productRoutes)
+// server.use("/api/v1/comments", commentsRoutes)
+// server.use("/static/images", express.static("images"))
 
-if (process.env.NODE_ENV === "production"){
-    server.use(express.static("client/build"))
-    server.get("/*", (req, res) => {
-        res.sendFile(path.resolve('client/build/index.html'))
-    })
-}
+// if (process.env.NODE_ENV === "production"){
+//     server.use(express.static("client/build"))
+//     server.get("/*", (req, res) => {
+//         res.sendFile(path.resolve('client/build/index.html'))
+//     })
+// }
 
 server.listen(port, () => {
     console.log(`server is running on http://localhost:${port}`)
