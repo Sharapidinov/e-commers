@@ -11,16 +11,16 @@ const Header = () => {
 
     return (
        <>
-           <header className="flex p-6 bg-yellow-600 justify-between items-center	">
+           <header className="flex p-3 sm:p-6 bg-yellow-600 justify-between items-center	">
                <div className="text-center">
-                   <Link className="mr-6" to={`/`}>Main</Link>
-                   <Link className="mr-6" to={`/basket`} >Basket</Link>
+                   <Link className="mr-1 sm:mr-6" to={`/`}>Main</Link>
+                   <Link className="mr-1 sm:mr-6" to={`/basket`} >Basket</Link>
                    {user?.role === "admin" &&  <Link  to={`/private`} >Add product</Link>}
                </div>
 
                <div className="flex text-center items-center">
                    {
-                       user && <div className=" z-80 text-blue-800 text-lg">
+                       user && <div className=" z-80 text-blue-800 text-sm sm:text-lg">
                          {user?.name}
                        </div>
                    }

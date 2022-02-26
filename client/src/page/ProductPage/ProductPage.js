@@ -3,12 +3,14 @@ import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {getProducts} from "../../redux/productsAction/productAction.js";
+import Spinner from "../../compnents/Spiner/Spiner.js";
 
 
 const ProductPage = () => {
     const [product, setProduct] = useState({})
     const {id} = useParams()
     const [text, setText] = useState('')
+    const [spinner, setSpinner] = useState(true)
     const {rates, currentRate} = useSelector(s => s.products)
     const {user, isAuth} = useSelector(s => s.auth)
     const nav = useNavigate()
@@ -19,6 +21,7 @@ const ProductPage = () => {
         axios(`/api/v1/products/${id}`)
             .then(({data}) => setProduct(data))
             .catch(e => console.log(e.response?.data?.message))
+            .finally(() => setSpinner(false))
     }, [id])
 
 
@@ -53,9 +56,11 @@ const ProductPage = () => {
             .catch(e => console.log(e.response?.data?.message))
     }
 
+
+    if (spinner) return <Spinner/>
     return (
-        <div className="container bg-gray-600 m-auto p-5">
-            <div className="items-center m-auto w-1/2 text-center border-3 bg-gray-400 p-5 ">
+        <div className="lg:container h-3/4 bg-gray-600 m-auto p-5">
+            <div className="items-center m-auto sm:w-1/2 text-center border-3 bg-gray-400 p-5 ">
                 <div className="mb-3 m-auto text-center"><img className="w-1/2 m-auto" src={product.image} alt=""/>
                 </div>
                 <div>

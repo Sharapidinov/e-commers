@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
-
 import Card from "../compnents/Card";
 import {useDispatch, useSelector} from "react-redux";
 import {getProducts, search} from "../redux/productsAction/productAction";
+import Spinner from "../compnents/Spiner/Spiner.js";
 
 const Main = () => {
-
     const dispatch = useDispatch()
+
     const {products, cart, searchState} = useSelector(s => s.products)
 
     useEffect(() => {
@@ -14,9 +14,11 @@ const Main = () => {
         dispatch(search(``))
     },[dispatch])
 
+
+
     return (
         <>
-            {!products?.filter(it => it.title.toLowerCase().includes(searchState.toLowerCase()) || searchState.trim().value === "").length && <div className="text-center mt-10  text-2xl font-black">No results</div>}
+            {!products?.filter(it => it.title.toLowerCase().includes(searchState.toLowerCase()) || searchState.trim().value === "").length && <Spinner/> }
             <div className="grid px-8 sm:px-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
 
                 {

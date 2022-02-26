@@ -36,7 +36,7 @@ const BurgerMenu = ({setBurger, burger}) => {
 
     return (
        <div onClick={() => setBurger(false)} className="fixed z-50 inset-0">
-           <div onClick={(e) => e.stopPropagation()} className="fixed top-0 right-0 w-1/4 p-4 bg-yellow-600  ">
+           <div onClick={(e) => e.stopPropagation()} className="fixed top-0 right-0 md:w-1/4 p-4 bg-yellow-600  ">
                {!inp &&
               <>
                   <div className=" text-right pt-2 pl-2 pr-6 mb-8">

@@ -7,7 +7,7 @@ const initialState = {
     currentRate: ["USD", "$"],
     sortByPrice: 1,
     sortByName: 1,
-    searchState: ""
+    searchState: "",
 }
 
 const reducer = (state = initialState, action) => {
@@ -15,14 +15,15 @@ const reducer = (state = initialState, action) => {
         case type.GER_PRODUCTS:
             return{
                 ...state,
-                products: action.products
+                products: action.products,
+
             }
 
         case type.UPDATE_CART:
 
             return {
                 ...state,
-                cart: action.cart
+                cart: action.cart,
             }
 
         case type.GET_RATES:

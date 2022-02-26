@@ -4,7 +4,7 @@ import {types} from "../types/ProductsType.js"
 const initialState = {
     user: null,
     token: Cookies.get("token"),
-    isAuth: !!Cookies.get("token")
+    isAuth: !!Cookies.get("token"),
 }
 
 const reducer = (state = initialState, action) => {
@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 user: action.user,
                 token: action.token,
-                isAuth: !!action.token,
+                isAuth: !!action.token
             }
         case types.LOGOUT:
             return {
@@ -23,6 +23,7 @@ const reducer = (state = initialState, action) => {
                 token:null,
                 isAuth: false
             }
+
         default: return state
     }
 }

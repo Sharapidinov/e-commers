@@ -5,10 +5,10 @@ const productsType = {
     SORT_BY_PRICE: "SORT_BY_PRICE",
     SORT_BY_NAME: "SORT_BY_NAME",
     CHANGE_RATE: "CHANGE_RATE",
-    SEARCH: "SEARCH"
+    SEARCH: "SEARCH",
 }
 export const types = {
     SING_IN: "SING_IN",
-    LOGOUT: "LOGOUT"
+    LOGOUT: "LOGOUT",
 }
 export default productsType
