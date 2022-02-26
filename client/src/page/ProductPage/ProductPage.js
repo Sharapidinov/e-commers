@@ -4,6 +4,7 @@ import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {getProducts} from "../../redux/productsAction/productAction.js";
 import Spinner from "../../compnents/Spiner/Spiner.js";
+import ShowImg from "../../compnents/ShowImg/ShowImg.js";
 
 
 const ProductPage = () => {
@@ -11,6 +12,7 @@ const ProductPage = () => {
     const {id} = useParams()
     const [text, setText] = useState('')
     const [spinner, setSpinner] = useState(true)
+    const [show,setShow] = useState(false)
     const {rates, currentRate} = useSelector(s => s.products)
     const {user, isAuth} = useSelector(s => s.auth)
     const nav = useNavigate()
@@ -68,7 +70,7 @@ const ProductPage = () => {
     return (
         <div className="lg:container h-3/4 bg-gray-600 m-auto p-5">
             <div className="items-center m-auto sm:w-1/2 text-center border-3 bg-gray-400 p-5 ">
-                <div className="mb-3 m-auto text-center"><img className="w-1/2 m-auto" src={product.image} alt=""/>
+                <div className="mb-3 m-auto text-center"><img onClick={() => setShow(true)} className="w-1/2 m-auto" src={product.image} alt=""/>
                 </div>
                 <div>
                     <p>Name: {product?.title}</p>
@@ -123,7 +125,7 @@ const ProductPage = () => {
                     </ul>
                 </div>
             </div>
-
+            {show && <ShowImg setShow={setShow} it={product}/>}
         </div>
     );
 };
