@@ -31,14 +31,14 @@ const ProductPage = () => {
             product: id,
             author: user?._id
         }
-     axios.post('/api/v1/comments/add' , comment)
-         .then(({data}) => {
-             setProduct({
-                 ...product,
-                 comments: [...product.comments, {...data.comment, author: {name: user.name}}]
-             })
-         })
-         .catch(e => console.log(e.response?.data?.message))
+        axios.post('/api/v1/comments/add', comment)
+            .then(({data}) => {
+                setProduct({
+                    ...product,
+                    comments: [...product.comments, {...data.comment, author: {name: user.name}}]
+                })
+            })
+            .catch(e => console.log(e.response?.data?.message))
     }
 
     const deleteProduct = (id) => {
@@ -50,9 +50,16 @@ const ProductPage = () => {
             .catch(e => console.log(e.response?.data?.message))
     }
 
-    const deleteComment = (_id) =>{
+    const deleteComment = (_id) => {
         axios.delete(`/api/v1/comments/${_id}`)
-            .then(({data}) => console.log(data.message))
+            .then(({data}) => {
+                    console.log(data.message)
+                    setProduct({
+                        ...product,
+                        comments: [...product.comments.filter(it => it._id !== _id)]
+                    })
+                }
+            )
             .catch(e => console.log(e.response?.data?.message))
     }
 
@@ -64,8 +71,9 @@ const ProductPage = () => {
                 <div className="mb-3 m-auto text-center"><img className="w-1/2 m-auto" src={product.image} alt=""/>
                 </div>
                 <div>
-                   <p>Name: {product?.title}</p>
-                    {isAuth && user?.role === "admin" && <button onClick={() => deleteProduct(product._id)} className="px-6 py-2 text-gray-50 bg-red-700">Delete</button>}
+                    <p>Name: {product?.title}</p>
+                    {isAuth && user?.role === "admin" && <button onClick={() => deleteProduct(product._id)}
+                                                                 className="px-6 py-2 text-gray-50 bg-red-700">Delete</button>}
                 </div>
                 <div>
                     <p className="mb-2">Price: {(product?.price * rates[currentRate[0]])?.toFixed(2)} {currentRate[1]} </p>
@@ -77,15 +85,17 @@ const ProductPage = () => {
                 </div>
 
 
-
                 {
                     isAuth && <div>
                         <div className="h-20 mb-3 p-1 px-10">
-                            <textarea className="w-full border border-1 h-20 resize-none contenteditable p-2" onChange={e => setText(e.target.value)} > </textarea>
+                            <textarea className="w-full border border-1 h-20 resize-none contenteditable p-2"
+                                      onChange={e => setText(e.target.value)}> </textarea>
 
                         </div>
 
-                        <button onClick={sendComments} className="bg-blue-700 px-6 py-2 active:bg-blue-300" >Add comment</button>
+                        <button onClick={sendComments} className="bg-blue-700 px-6 py-2 active:bg-blue-300">Add
+                            comment
+                        </button>
                     </div>
                 }
 
@@ -94,15 +104,18 @@ const ProductPage = () => {
                     <ul>
                         Comments:
                         {
-                            product?.comments?.map(it=> {
-                                return <li className=" flex justify-between bg-white border-1 border-black rounded m-2 p-2">
+                            product?.comments?.map(it => {
+                                return <li
+                                    className=" flex justify-between bg-white border-1 border-black rounded m-2 p-2">
 
-                                        <div>
-                                            <p>{it.text}</p>
-                                            <p className="text-gray-500">{it?.author?.name}</p>
-                                        </div>
                                     <div>
-                                        <button onClick={() => deleteComment(it._id)} className="px-6 py-2 text-gray-50 bg-red-700">Delete</button>
+                                        <p>{it.text}</p>
+                                        <p className="text-gray-500">{it?.author?.name}</p>
+                                    </div>
+                                    <div>
+                                        <button onClick={() => deleteComment(it._id)}
+                                                className="px-6 py-2 text-gray-50 bg-red-700">Delete
+                                        </button>
                                     </div>
                                 </li>
                             })
